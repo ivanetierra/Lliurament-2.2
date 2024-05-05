@@ -102,16 +102,60 @@ function cleanCart() {
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+
+    var total = 0;
+    cart.forEach(item => {
+        if(item.subtotalWithDiscount){
+            total += item.subtotalWithDiscount * item.quantity;
+        }else{
+            total += item.price * item.quantity;
+        }
+    })    
+    return total;
 }
 
 // Exercise 4
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+
+    cart.forEach(item => {
+        if(item.offer){
+            if(item.quantity >= item.offer.number){
+                item.subtotalWithDiscount = item.price - (item.price * item.offer.percent / 100)
+            }
+        }
+    })  
 }
 
 // Exercise 5
 function printCart() {
-    // Fill the shopping cart modal manipulating the shopping cart dom
+
+    applyPromotionsCart();
+ 
+    var cartList = document.getElementById('cart_list');
+
+    var html = '';
+
+    cart.forEach(item => {
+        var total = item.price * item.quantity;
+
+        if (item.subtotalWithDiscount) {
+            total = item.subtotalWithDiscount * item.quantity;
+        }
+
+        html += `
+            <tr>
+                <th scope="row">${item.name}</th>
+                <td>$${item.price.toFixed(2)}</td>
+                <td>${item.quantity}</td>
+                <td>$${total.toFixed(2)}</td>
+            </tr>
+        `;
+    });
+
+    cartList.innerHTML = html;
+
+    document.getElementById('total_price').textContent = calculateTotal().toFixed(2);
 }
 
 
