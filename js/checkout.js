@@ -5,24 +5,47 @@ function validate() {
 	// Get the input fields
 	var fName = document.getElementById("fName");
 	var fEmail = document.getElementById("fEmail");
+	var fAddress = document.getElementById("fAddress");
+    var fLastN = document.getElementById("fLastN");
+	var fPassword = document.getElementById("fPassword");
+	var fPhone = document.getElementById("fPhone");
 
 	// Get the error elements
 	var errorName = document.getElementById("errorName");
 	var errorEmail = document.getElementById("errorEmail");  
+	var errorAddress = document.getElementById("errorAddress");
+	var errorLastN = document.getElementById("errorLastN");
+	var errorPassword = document.getElementById("errorPassword");	
+	var errorPhone = document.getElementById("errorPhone");
 	
 	// Validate fields entered by the user: name, phone, password, and email
-	if(fName.value == ""){
-		error++;
-	}
+	var nameRegex = /^[a-zA-Z]$/;
+    var phoneRegex = /^\d{9}$/;
+    var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
+    var emailRegex = /^\S+@\S+\.\S+$/;
+	
+	validateField(fName, nameRegex, errorName);
+    validateField(fEmail, emailRegex, errorEmail);
+    validateField(fAddress, nameRegex, errorAddress);
+    validateField(fLastN, nameRegex, errorLastN);
+    validateField(fPassword, passwordRegex, errorPassword);
+    validateField(fPhone, phoneRegex, errorPhone);
 
-	if(fEmail.value == ""){
-		error++;
-	}
+    function validateField(field, regex, errorElement) {
+        if(field.value.length < 3 || !regex.test(field.value)){
+            error++;
+            field.classList.add('is-invalid');
+            errorElement.style.display = 'block';
+        } else {
+            field.classList.remove('is-invalid');
+            errorElement.style.display = 'none';
+        }
+    }
 	 
 	if(error>0){
-		alert("Error");
+		setTimeout(()=> {alert("Error");}, 100);
+			
 	}else{
 		alert("OK");
 	}
-
 }
