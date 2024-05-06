@@ -164,6 +164,7 @@ function printCart() {
     cartList.innerHTML = html;
 
     document.getElementById('total_price').textContent = calculateTotal().toFixed(2);
+    document.getElementById('count_product').textContent = cart.length;
 }
 
 
@@ -186,3 +187,6 @@ function removeFromCart(id) {
 function open_modal() {
     printCart();
 }
+
+
+
