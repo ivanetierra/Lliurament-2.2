@@ -24,7 +24,7 @@ function validate() {
 	var errorPhone = document.getElementById("errorPhone");
 	
 	// Validate fields entered by the user: name, phone, password, and email
-	var nameRegex = /^[a-zA-Z]$/;
+	var nameRegex = /^[a-zA-Z]+$/;
     var phoneRegex = /^\d{9}$/;
     var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
     var emailRegex = /^\S+@\S+\.\S+$/;
@@ -37,7 +37,7 @@ function validate() {
     validateField(fPhone, phoneRegex, errorPhone);
 
     function validateField(field, regex, errorElement) {
-        if(field.value.length>= 3 || regex.test(field.value)){
+        if(field.value.length>= 3 && regex.test(field.value)){
 			field.classList.remove('is-invalid');
             errorElement.style.display = 'none';
 		} else {
