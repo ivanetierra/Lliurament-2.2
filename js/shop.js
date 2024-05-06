@@ -122,9 +122,9 @@ function applyPromotionsCart() {
         if(item.offer){
             if(item.quantity >= item.offer.number){
                 item.subtotalWithDiscount = item.price - (item.price * item.offer.percent / 100)
+            }else{
+                delete item.subtotalWithDiscount;
             }
-        }else{
-            delete item.subtotalWithDiscount;
         }
     })  
 }
@@ -146,16 +146,18 @@ function printCart() {
         }
 
         html += `
-            <tr>
-                <th scope="row">${item.name}</th>
-                <td>$${item.price.toFixed(2)}</td>
-                <td>${item.quantity}</td>
-                <td>$${total.toFixed(2)}</td>
-                <td>
-                    <button type="button" class="btn btn-secondary m-2" onclick="removeFromCart(${item.id})">-</button>
-                    <button type="button" class="btn btn-secondary" onclick="buy(${item.id})">+</button>
-                </td>
-            </tr>
+        <tr>
+        <th scope="row" class="align-middle">${item.name}</th>
+        <td class="align-middle">$${item.price.toFixed(2)}</td>
+        <td class="align-middle">${item.quantity}</td>
+        <td class="align-middle">$${total.toFixed(2)}</td>
+        <td class="align-middle">
+            <div class="d-flex">
+                <button type="button" class="btn btn-secondary m-2 py-1" onclick="removeFromCart(${item.id})">-</button>
+                <button type="button" class="btn btn-secondary m-2 py-1" onclick="buy(${item.id})">+</button>
+            </div>
+        </td>
+    </tr>
         `;
     });
 
