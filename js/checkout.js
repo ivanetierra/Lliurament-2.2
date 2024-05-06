@@ -1,5 +1,10 @@
 
 // Exercise 6
+document.getElementById('btn').addEventListener('click', function(event) {
+    event.preventDefault();
+    validate();
+});
+
 function validate() {
 	var error = 0;
 	// Get the input fields

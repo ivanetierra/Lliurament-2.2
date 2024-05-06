@@ -79,8 +79,6 @@ function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
 
-    
-
     var product = products.find(product => product.id === id)
 
     var cartItem = cart.find(item => item.id === product.id)
@@ -91,12 +89,14 @@ function buy(id) {
     else{
         cart.push({...product, quantity: 1})
     }
-    
+
+    printCart();
 }
 
 // Exercise 2
 function cleanCart() {
     cart = [];
+    printCart();
 }
 
 // Exercise 3
@@ -123,6 +123,8 @@ function applyPromotionsCart() {
             if(item.quantity >= item.offer.number){
                 item.subtotalWithDiscount = item.price - (item.price * item.offer.percent / 100)
             }
+        }else{
+            delete item.subtotalWithDiscount;
         }
     })  
 }
@@ -149,6 +151,10 @@ function printCart() {
                 <td>$${item.price.toFixed(2)}</td>
                 <td>${item.quantity}</td>
                 <td>$${total.toFixed(2)}</td>
+                <td>
+                    <button type="button" class="btn btn-secondary m-2" onclick="removeFromCart(${item.id})">-</button>
+                    <button type="button" class="btn btn-secondary" onclick="buy(${item.id})">+</button>
+                </td>
             </tr>
         `;
     });
@@ -163,7 +169,16 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
+    var cartItem = cart.find(item => item.id === id);
+    if(cartItem){
+        cartItem.quantity -= 1;
+    }
+    if(cartItem.quantity === 0){
+        cart.splice(cart.indexOf(cartItem), 1);
+    }
 
+    applyPromotionsCart();
+    printCart();
 }
 
 function open_modal() {
