@@ -37,13 +37,13 @@ function validate() {
     validateField(fPhone, phoneRegex, errorPhone);
 
     function validateField(field, regex, errorElement) {
-        if(field.value.length < 3 || !regex.test(field.value)){
-            error++;
-            field.classList.add('is-invalid');
-            errorElement.style.display = 'block';
-        } else {
-            field.classList.remove('is-invalid');
+        if(field.value.length>= 3 || regex.test(field.value)){
+			field.classList.remove('is-invalid');
             errorElement.style.display = 'none';
+		} else {
+			error++;
+			field.classList.add('is-invalid');
+			errorElement.style.display = 'block';
         }
     }
 	 
@@ -51,6 +51,6 @@ function validate() {
 		setTimeout(()=> {alert("Error");}, 100);
 			
 	}else{
-		alert("OK");
+		setTimeout(()=> {alert("OK");}, 100);
 	}
 }
