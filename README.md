@@ -1,4 +1,4 @@
-# S2.1. Ecommerce
+# S2.2. Ecommerce
 
 ## 📄 Descripción
 
