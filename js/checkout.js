@@ -47,10 +47,8 @@ function validate() {
         }
     }
 	 
-	if(error>0){
-		setTimeout(()=> {alert("Error");}, 100);
-			
-	}else{
+	if(error === 0){
+
 		setTimeout(()=> {alert("OK");}, 100);
 	}
 }
